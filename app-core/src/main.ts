@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-import * as createRedisStore from 'connect-redis';
+import connectRedis from 'connect-redis';
 import Redis from 'ioredis'
 
-import * as session from 'express-session';
-import * as passport from 'passport';
+import session from 'express-session';
+import passport from 'passport';
 import { ValidationPipe } from '@nestjs/common';
 
 
@@ -30,25 +30,25 @@ async function bootstrap() {
   
 
   // Configure session management using Redis as the session store. It creates a Redis client and uses it to store session data, with a secret key for signing the session ID cookie and a specified expiration time for the cookie.
-  const RedisStore = createRedisStore(session);
+  const RedisStore = connectRedis(session);
   const redisClient = new Redis({
-    host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT)
+    host: process.env.REDIS_HOST!,
+    port: parseInt(process.env.REDIS_PORT!)
   });
 
   app.use(
     session({
       store: new RedisStore({ client: redisClient as any }),
-      secret: process.env.TOKEN_SECRET,
+      secret: process.env.TOKEN_SECRET!,
       resave: false,
       saveUninitialized: false,
-      cookie: { maxAge: parseInt(process.env.EXPIRE_IN) }
+      cookie: { maxAge: parseInt(process.env.EXPIRE_IN!) }
     })
   );
 
   app.use(passport.initialize());
   app.use(passport.session());
 
-  await app.listen(process.env.PORT);
+  await app.listen(parseInt(process.env.PORT!));
 }
 bootstrap();

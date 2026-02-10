@@ -197,11 +197,11 @@ async sendVerificationEmail(email: string): Promise<boolean> {
       if (existingUser && existingUser.email !== email) {
         throw new BadRequestException('El correo electrónico ya está en uso');
       }
-      user.email = updateProfileDto.email;
+      user.email = updateProfileDto.email!;
     }
 
-    if (firstNameChanged) user.firstName = updateProfileDto.firstName;
-    if (lastNameChanged) user.lastName = updateProfileDto.lastName;
+    if (firstNameChanged) user.firstName = updateProfileDto.firstName!;
+    if (lastNameChanged) user.lastName = updateProfileDto.lastName!;
 
     // update lastProfileUpdate timestamp
     user.lastProfileUpdate = Date.now();
