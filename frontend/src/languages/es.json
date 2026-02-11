@@ -1,0 +1,43 @@
+{
+  "language_selection": "Selección de Idioma",
+  "language": "Idioma",
+  "view_details": "Ver Detalles",
+  "welcome": "Bienvenido, {{firstName}} {{lastName}}",
+  "security": "Seguridad",
+  "crypto_potential": "Con las criptomonedas, puedes ahorrar y obtener más rendimientos. ¡Descubre el potencial de tu dinero!",
+  "password_security": "Recuerda que mantener tus contraseñas seguras y únicas es fundamental.",
+  "loading": "Cargando...",
+  "copy": "Copiar",
+  "user_profile": "Perfil",
+  "change_password": "Contraseña",
+  "two_factor_auth": "2FA",
+  "language_selector": "Idioma",
+  "verify_email": "Email",
+  "settings_title": "Configuración",
+  "go_back": "Regresar",
+
+  "nav": {
+    "feed": "Feed",
+    "live": "Live",
+    "chat": "Chat",
+    "open_settings": "Abrir configuración",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "hi": "Hola, {{firstName}}"
+  },
+
+  "home": {
+    "title": "Bienvenida",
+    "subtitle": "Bienvenida a la aplicación."
+  },
+
+  "dashboard": {
+    "active_users": "Usuarios Activos",
+    "messages_today": "Mensajes Hoy",
+    "active_chats": "Chats Activos",
+    "recent_conversations": "Conversaciones Recientes",
+    "no_conversations": "Aún no hay conversaciones",
+    "start_chat": "Iniciar Chat",
+    "coming_soon": "Próximamente"
+  }
+}

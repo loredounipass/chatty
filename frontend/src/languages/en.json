@@ -1,0 +1,43 @@
+{
+  "language_selection": "Language Selection",
+  "language": "Language",
+  "view_details": "View Details",
+  "welcome": "Welcome, {{firstName}} {{lastName}}",
+  "security": "Security",
+  "crypto_potential": "With cryptocurrencies, you can save and earn more returns. Discover the potential of your money!",
+  "password_security": "Remember that keeping your passwords secure and unique is essential.",
+  "loading": "Loading...",
+  "copy": "Copy",
+  "user_profile": "Profile",
+  "change_password": "Password",
+  "two_factor_auth": "2FA",
+  "language_selector": "Language",
+  "verify_email": "Email",
+  "settings_title": "Settings",
+  "go_back": "Go Back",
+
+  "nav": {
+    "feed": "Feed",
+    "live": "Live",
+    "chat": "Chat",
+    "open_settings": "Open settings",
+    "settings": "Settings",
+    "logout": "Logout",
+    "hi": "Hi, {{firstName}}"
+  },
+
+  "home": {
+    "title": "Welcome",
+    "subtitle": "Welcome to the application."
+  },
+
+  "dashboard": {
+    "active_users": "Active Users",
+    "messages_today": "Messages Today",
+    "active_chats": "Active Chats",
+    "recent_conversations": "Recent Conversations",
+    "no_conversations": "No conversations yet",
+    "start_chat": "Start Chat",
+    "coming_soon": "Coming Soon"
+  }
+}

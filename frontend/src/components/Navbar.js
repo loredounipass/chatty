@@ -31,6 +31,7 @@ import {
 } from '@mui/icons-material';
 import useAuth from '../hooks/useAuth';
 import { AuthContext } from '../hooks/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -77,6 +78,7 @@ const navLinkItemStyle = {
 };
 
 function DashboardContent() {
+  const { t } = useTranslation();
   const { auth, setAuth } = useContext(AuthContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -88,16 +90,13 @@ function DashboardContent() {
   const handleCloseUserMenu = () => setAnchorElUser(null);
   const handleOpenUserMenu = (event) => setAnchorElUser(event.currentTarget);
 
-  const handleClickUserMenu = async (e) => {
-    e.stopPropagation();
-    const action = e.target.innerHTML;
-
-    if (action === 'Logout') {
+  const handleClickUserMenu = async (actionKey) => {
+    if (actionKey === 'logout') {
       setAuth(null);
       // Trigger server logout but don't wait for it — reload immediately for instant UX
       logoutUser().catch(() => {});
       window.location.reload();
-    } else if (action === 'Settings') {
+    } else if (actionKey === 'settings') {
       history.push('/settings');
     }
 
@@ -113,15 +112,15 @@ function DashboardContent() {
   if (!auth) return null;
 
   const settings = [
-    { label: `Hi, ${auth.firstName}`, icon: null },
-    { label: 'Settings', icon: <SettingsIcon sx={{ mr: 1 }} /> },
-    { label: 'Logout', icon: <LogoutIcon sx={{ mr: 1 }} /> },
+    { key: 'greeting', label: t('nav.hi', { firstName: auth.firstName }), icon: null },
+    { key: 'settings', label: t('nav.settings'), icon: <SettingsIcon sx={{ mr: 1 }} /> },
+    { key: 'logout', label: t('nav.logout'), icon: <LogoutIcon sx={{ mr: 1 }} /> },
   ];
 
   const navItems = [
-    { href: '/feed', label: 'Feed', Icon: RssFeedIcon },
-    { href: '/live', label: 'Live', Icon: LiveTvIcon },
-    { href: '/chat', label: 'chat', Icon: ChatIcon },
+    { href: '/feed', label: t('nav.feed'), Icon: RssFeedIcon },
+    { href: '/live', label: t('nav.live'), Icon: LiveTvIcon },
+    { href: '/chat', label: t('nav.chat'), Icon: ChatIcon },
   ];
 
   const renderNavLinks = () => (
@@ -240,11 +239,11 @@ function DashboardContent() {
                     </ListItem>
                   ))}
                   <Divider />
-                  {settings.map(({ label, icon }) => (
+                  {settings.map(({ key, label, icon }) => (
                     <ListItem
                       button
-                      key={label}
-                      onClick={handleClickUserMenu}
+                      key={key}
+                      onClick={() => handleClickUserMenu(key)}
                       sx={{ ...navLinkItemStyle, color: 'white' }}
                     >
                       {icon}
@@ -259,7 +258,7 @@ function DashboardContent() {
           )}
 
           <Box>
-            <Tooltip title="Open settings">
+            <Tooltip title={t('nav.open_settings')}>
               <IconButton
                 onClick={(e) => {
                   e.stopPropagation();
@@ -291,8 +290,8 @@ function DashboardContent() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map(({ label, icon }) => (
-                <MenuItem key={label} onClick={handleClickUserMenu}>
+              {settings.map(({ key, label, icon }) => (
+                <MenuItem key={key} onClick={() => handleClickUserMenu(key)}>
                   {icon}
                   <Typography textAlign="center">{label}</Typography>
                 </MenuItem>
