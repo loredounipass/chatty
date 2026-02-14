@@ -27,7 +27,7 @@ export class UserService {
     const createUser = new this.userModel(createUserDto);
     const user = await this.getUserByEmail(createUserDto.email);
     if (user) {
-      throw new BadRequestException();
+      throw new BadRequestException("Este correo electrónico ya está registrado");
     }
 
     createUser.password = await this.hashService.hashPassword(createUser.password);
