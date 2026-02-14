@@ -7,6 +7,7 @@ import { BullModule } from '@nestjs/bull';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TwoFactorAuthModule  } from './two-factor/verification.module';
+import { MessagesAndMultimediaModule } from './messages-and-multimedia/messages-and-multimedia.module';
 
 
 // This is the main application module that imports and configures various modules such as ConfigModule for environment variables, MongooseModule for MongoDB connection, ThrottlerModule for rate limiting, BullModule for Redis-based queues, and other feature modules like UserModule, WalletModule, AuthModule, TransactionModule, ProviderModule, and TwoFactorAuthModule. It also provides the AppService for handling application-level logic.
@@ -32,6 +33,7 @@ import { TwoFactorAuthModule  } from './two-factor/verification.module';
       }
     }),
     UserModule,
+    MessagesAndMultimediaModule,
     AuthModule,
     TwoFactorAuthModule
   ],
