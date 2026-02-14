@@ -1,5 +1,5 @@
-# chatty
-Chatty is a real-time chat application built with **NestJS** and **React**. It allows users to send and receive messages instantly, providing a smooth and interactive communication experience.
+# freenet
+freenet is a real-time chat application built with **NestJS** and **React**. It allows users to send and receive messages instantly, providing a smooth and interactive communication experience.
 
 ---
 
@@ -56,7 +56,7 @@ EMAIL_PASS=yourpassword
 
 ```bash
 pnpm install
-pnpm run start:dev
+pnpm start
 ```
 
 The backend listens by default on `http://localhost:4000` and exposes the API under `/secure/api`.
