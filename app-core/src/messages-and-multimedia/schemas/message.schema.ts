@@ -20,7 +20,24 @@ export class Message {
   @Prop()
   multimediaUrl?: string;
 
+  @Prop({ enum: ['sent', 'delivered', 'read'], default: 'sent' })
+  status: string;
+
   _id?: string;
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Message);
+// Compound index to support common queries and sort by latest messages
+MessageSchema.index({ sender: 1, receiver: 1, createdAt: -1 });
+
+// Additional single-side indexes to allow efficient queries for either side
+MessageSchema.index({ receiver: 1, createdAt: -1 });
+MessageSchema.index({ sender: 1, createdAt: -1 });
+
+// Optional: lean-friendly transform
+MessageSchema.set('toJSON', {
+  transform: function (doc: any, ret: any) {
+    ret._id = ret._id?.toString();
+    delete ret.__v;
+  },
+});

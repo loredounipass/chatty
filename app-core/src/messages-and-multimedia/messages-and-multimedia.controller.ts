@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Req, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { MessagesAndMultimediaService } from './messages-and-multimedia.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { AuthenticatedGuard } from 'src/guard/auth/authenticated.guard';
-import type { Request } from 'express';
+import { CurrentUser } from 'src/guard/auth/current-user.decorator';
 
 @Controller('messages')
 export class MessagesAndMultimediaController {
@@ -11,14 +11,13 @@ export class MessagesAndMultimediaController {
 
   @UseGuards(AuthenticatedGuard)
   @Post()
-  async create(@Body() dto: CreateMessageDto, @Req() req: Request) {
-    return this.service.createMessage(dto, (req as any).user);
+  async create(@Body() dto: CreateMessageDto, @CurrentUser() user: any) {
+    return this.service.createMessage(dto, user._id.toString());
   }
 
-
-@UseGuards(AuthenticatedGuard)
-  @Get('user/:id')
-  async getByUser(@Param('id') id: string, @Req() req: Request) {
-    return this.service.getMessagesByUser(id, (req as any).user);
+  @UseGuards(AuthenticatedGuard)
+  @Get('me')
+  async getMyMessages(@CurrentUser() user: any) {
+    return this.service.getMessagesByUser(user._id.toString());
   }
 }
